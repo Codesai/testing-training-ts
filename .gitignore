@@ -1,0 +1,9 @@
+node_modules
+coverage
+reports
+dist
+.idea
+build
+.stryker-tmp
+.DS_Store
+.output.txt
