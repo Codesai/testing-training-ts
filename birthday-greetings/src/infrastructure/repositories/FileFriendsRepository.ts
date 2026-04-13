@@ -1,45 +1,45 @@
-import {EmployeesRepository} from "../../core/EmployeesRepository";
-import {Employee} from "../../core/Employee";
+import {FriendsRepository} from "../../core/FriendsRepository";
+import {Friend} from "../../core/Friend";
 import {OurDate} from "../../core/OurDate";
 import fs from "fs";
 import {DateRepresentation} from "./DateRepresentation";
-import {CannotReadEmployeesError} from "../../core/CannotReadEmployeesError";
+import {CannotReadFriendsError} from "../../core/CannotReadFriendsError";
 
-export class FileEmployeesRepository implements EmployeesRepository {
+export class FileFriendsRepository implements FriendsRepository {
     private readonly _path: string;
 
     constructor(path: string) {
         this._path = path;
     }
 
-    allEmployees(): Array<Employee> {
-        const employees: Array<Employee> = [];
+    allFriends(): Array<Friend> {
+        const friends: Array<Friend> = [];
         this.readFileLines().forEach(
             (line: string) => {
-                const employeeData = line.split(", ");
-                employees.push(this.createEmployeeFrom(employeeData));
+                const friendData = line.split(", ");
+                friends.push(this.createFriendFrom(friendData));
             }
         );
-        return employees;
+        return friends;
     }
 
-    private createEmployeeFrom(employeeData: string[]): Employee {
-        return new Employee(getFirstName(), extractDate(), getEmail());
+    private createFriendFrom(friendData: string[]): Friend {
+        return new Friend(getFirstName(), extractDate(), getEmail());
 
         function getFirstName(): string {
-            return employeeData[1];
+            return friendData[1];
         }
         function extractDate(): OurDate {
-            const dateAsString = employeeData[2];
+            const dateAsString = friendData[2];
             try {
                 return new DateRepresentation(dateAsString).toDate();
             } catch (e) {
-                throw new CannotReadEmployeesError(`Badly formatted employee birth date: '${dateAsString}'`);
+                throw new CannotReadFriendsError(`Badly formatted friend birth date: '${dateAsString}'`);
             }
         }
 
         function getEmail(): string {
-            return employeeData[3];
+            return friendData[3];
         }
     }
 
@@ -48,7 +48,7 @@ export class FileEmployeesRepository implements EmployeesRepository {
             let lines = fs.readFileSync(this._path, {encoding: 'utf8'}).split(/\r?\n/);
             return removeHeader(lines);
         } catch (e) {
-            throw new CannotReadEmployeesError(
+            throw new CannotReadFriendsError(
                 `Cannot load from file: '${this._path}'`
             );
         }

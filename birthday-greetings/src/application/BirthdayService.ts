@@ -1,29 +1,29 @@
 import {OurDate} from "../core/OurDate";
-import {Employee} from "../core/Employee";
-import {EmployeesRepository} from "../core/EmployeesRepository";
-import {GreetingMessage} from "../core/GreetingMessage";
+import {Friend} from "../core/Friend";
+import {FriendsRepository} from "../core/FriendsRepository";
+import {GreetingsMessage} from "../core/GreetingsMessage";
 import {GreetingsSender} from "../core/GreetingsSender";
 
 export class BirthdayService {
-    private readonly _employeesRepository: EmployeesRepository;
+    private readonly _friendsRepository: FriendsRepository;
     private _greetingsSender: GreetingsSender;
 
-    constructor(employeeRepository: EmployeesRepository, greetingsSender: GreetingsSender) {
-        this._employeesRepository = employeeRepository;
+    constructor(friendsRepository: FriendsRepository, greetingsSender: GreetingsSender) {
+        this._friendsRepository = friendsRepository;
         this._greetingsSender = greetingsSender;
     }
 
     sendGreetings(date: OurDate): void {
-        this._greetingsSender.send(this.greetingMessagesFor(this.employeesHavingBirthday(date)));
+        this._greetingsSender.send(this.greetingMessagesFor(this.friendsHavingBirthdayOn(date)));
     }
 
-    private greetingMessagesFor(employees: Array<Employee>): Array<GreetingMessage> {
-        return GreetingMessage.generateForSome(employees);
+    private greetingMessagesFor(friends: Array<Friend>): Array<GreetingsMessage> {
+        return GreetingsMessage.generateForSome(friends);
     }
 
-    private employeesHavingBirthday(today: OurDate): Array<Employee> {
-        return this._employeesRepository.allEmployees().filter(
-            (employee: Employee) => employee.isBirthday(today)
+    private friendsHavingBirthdayOn(today: OurDate): Array<Friend> {
+        return this._friendsRepository.allFriends().filter(
+            (friend: Friend) => friend.isBirthday(today)
         );
     }
 }

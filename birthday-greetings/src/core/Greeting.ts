@@ -1,4 +1,4 @@
-import {Employee} from "./Employee";
+import {Friend} from "./Friend";
 
 export class Greeting {
     private readonly _header: string;
@@ -9,8 +9,8 @@ export class Greeting {
         this._content = content;
     }
 
-    static forBirthdayOf(employee: Employee): Greeting {
-        const content = `Happy Birthday, dear ${employee.getFirstName()}!`;
+    static forBirthdayOf(friend: Friend): Greeting {
+        const content = `Happy Birthday, dear ${friend.getFirstName()}!`;
         const header = "Happy Birthday!";
         return new Greeting(header, content);
     }

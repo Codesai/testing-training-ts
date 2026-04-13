@@ -1,6 +1,6 @@
 import {OurDate} from "./OurDate";
 
-export class Employee {
+export class Friend {
 
     private readonly _birthDate: OurDate;
     private readonly _firstName: string;

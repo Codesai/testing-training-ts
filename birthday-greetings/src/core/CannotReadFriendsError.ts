@@ -1,4 +1,4 @@
-export class CannotReadEmployeesError extends Error {
+export class CannotReadFriendsError extends Error {
     constructor(cause: string) {
         super(cause);
     }

@@ -1,7 +1,7 @@
 import {EmailNotSentError} from "./EmailNotSentError";
 import nodemailer, {Transporter} from "nodemailer";
 import {MailOptions} from "nodemailer/lib/smtp-transport";
-import {GreetingMessage} from "../core/GreetingMessage";
+import {GreetingsMessage} from "../core/GreetingsMessage";
 import {GreetingsSender} from "../core/GreetingsSender";
 
 export class EmailGreetingsSender implements GreetingsSender {
@@ -15,7 +15,7 @@ export class EmailGreetingsSender implements GreetingsSender {
         this.sender = sender;
     }
 
-    send(messages: Array<GreetingMessage>): void {
+    send(messages: Array<GreetingsMessage>): void {
         for (const message of messages) {
             const recipient = message.to();
             const body = message.text();

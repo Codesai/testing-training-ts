@@ -1,5 +1,5 @@
-import {GreetingMessage} from "./GreetingMessage";
+import {GreetingsMessage} from "./GreetingsMessage";
 
 export interface GreetingsSender {
-    send(messages: Array<GreetingMessage>): void;
+    send(messages: Array<GreetingsMessage>): void;
 }
