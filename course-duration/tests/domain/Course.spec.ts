@@ -1,6 +1,6 @@
 
 describe('Course', () => {
-    it('canary test, fix me', () => {
-        expect(true).toBe(false);
+    it('canary test case to check configuration', () => {
+        expect(true).toBeTruthy();
     });
 });
