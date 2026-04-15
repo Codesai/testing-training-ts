@@ -31,7 +31,7 @@ export class ArgentRoseStore {
 
     private updateRegularProduct(product: Product, newSellIn: number): void {
         const changeBeforeExpiry = 2;
-        const decrease = (newSellIn < -1) ? changeBeforeExpiry * 2 : changeBeforeExpiry;
+        const decrease = (newSellIn <= -1) ? changeBeforeExpiry * 2 : changeBeforeExpiry;
         product.decreaseQuality(decrease);
 
     }
