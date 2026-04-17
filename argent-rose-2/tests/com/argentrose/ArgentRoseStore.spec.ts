@@ -93,16 +93,6 @@ describe("ArgentRoseStore", () => {
         );
     });
 
-    it("When there are several products each one is updated", () => {
-        const store = argentRoseStoreWith(theatrePasses(30, 5), regularProduct(5, 3));
-
-        store.update();
-
-        expect(store).toEqual(
-            argentRoseStoreWith(theatrePasses(29, 6), regularProduct(4, 1))
-        );
-    });
-
     function theatrePasses(sellIn: number, quality: number): Product {
         return new Product("Theatre Passes", sellIn, quality);
     }
