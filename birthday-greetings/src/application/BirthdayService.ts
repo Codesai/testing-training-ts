@@ -13,8 +13,8 @@ export class BirthdayService {
         this._greetingsSender = greetingsSender;
     }
 
-    sendGreetings(date: OurDate): void {
-        this._greetingsSender.send(this.greetingMessagesFor(this.friendsHavingBirthdayOn(date)));
+    async sendGreetings(date: OurDate): Promise<void> {
+        await this._greetingsSender.send(this.greetingMessagesFor(this.friendsHavingBirthdayOn(date)));
     }
 
     private greetingMessagesFor(friends: Array<Friend>): Array<GreetingsMessage> {

@@ -15,19 +15,19 @@ export class EmailGreetingsSender implements GreetingsSender {
         this.sender = sender;
     }
 
-    send(messages: Array<GreetingsMessage>): void {
+    async send(messages: Array<GreetingsMessage>): Promise<void> {
         for (const message of messages) {
             const recipient = message.to();
             const body = message.text();
             const subject = message.subject();
-            this.sendTheMessage(subject, body, recipient);
+            await this.sendTheMessage(subject, body, recipient);
         }
     }
 
-    private sendTheMessage(subject: string, body: string, recipient: string): void {
+    private async sendTheMessage(subject: string, body: string, recipient: string): Promise<void> {
         const transport = this.CreateMailSession();
         const msg = this.buildMessage(recipient, subject, body);
-        this.sendMessage(msg, transport);
+        await this.sendMessage(msg, transport);
     }
 
     private buildMessage(recipient: string, subject: string, body: string) {
@@ -46,12 +46,7 @@ export class EmailGreetingsSender implements GreetingsSender {
         });
     }
 
-    // made protected for testing :-(
-    protected sendMessage(msg: MailOptions, transport: Transporter): void {
-        transport.sendMail(msg, (err: Error | null) => {
-            if (err) {
-                throw new EmailNotSentError(err);
-            }
-        });
+    private async sendMessage(msg: MailOptions, transport: Transporter): Promise<void> {
+        await transport.sendMail(msg);
     }
 }
