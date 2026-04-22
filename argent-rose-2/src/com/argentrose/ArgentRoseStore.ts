@@ -20,9 +20,9 @@ export class ArgentRoseStore {
     }
 
     private updateTheatrePasses(product: Product, newSellIn: number): void {
-        if (newSellIn <= 0) {
+        if (newSellIn < 0) {
             product.dropQualityToZero();
-        } else if (newSellIn < 5) {
+        } else if (newSellIn <= 5) {
             product.increaseQuality(3);
         } else {
             product.increaseQuality(1);
